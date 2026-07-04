@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortunate Hub Ilorin — All-in-One Lifestyle & Hangout Spot</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ===== RESET & BASE ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --gold: #c9a84c;
+            --gold-light: #e8d5a3;
+            --gold-dark: #a8892e;
+            --dark: #1a1410;
+            --dark-soft: #2a221c;
+            --dark-card: #251e18;
+            --cream: #faf6ee;
+            --text-light: #f5ede4;
+            --text-muted: #b8aa9a;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            --radius: 18px;
+            --transition: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark);
+            color: var(--text-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--dark-soft);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold-dark);
+        }
+
+        /* ===== REUSABLE ===== */
+        .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            background: rgba(201, 168, 76, 0.12);
+            padding: 6px 18px;
+            border-radius: 50px;
+            margin-bottom: 14px;
+            border: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4.5vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1.15;
+            color: #fff;
+            margin-bottom: 16px;
+        }
+        .section-title span {
+            color: var(--gold);
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            max-width: 580px;
+            line-height: 1.7;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            background: var(--gold);
+            color: var(--dark);
+            font-weight: 600;
+            padding: 14px 38px;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            letter-spacing: 0.3px;
+            box-shadow: 0 8px 28px rgba(201, 168, 76, 0.25);
+        }
+        .btn-primary:hover {
+            background: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 14px 40px rgba(201, 168, 76, 0.35);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            background: transparent;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 13px 36px;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-3px);
+        }
+
+        /* ===== NAV ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 999;
+            padding: 16px 0;
+            transition: var(--transition);
+        }
+        .navbar.scrolled {
+            background: rgba(26, 20, 16, 0.92);
+            backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+            padding: 10px 0;
+        }
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .logo-img {
+            height: 44px;
+            width: auto;
+            border-radius: 6px;
+        }
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: var(--transition);
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: var(--transition);
+        }
+        .nav-links a:hover {
+            color: #fff;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--dark) !important;
+            padding: 8px 22px;
+            border-radius: 60px;
+            font-weight: 600 !important;
+            font-size: 0.82rem !important;
+            transition: var(--transition);
+        }
+        .nav-cta::after {
+            display: none !important;
+        }
+        .nav-cta:hover {
+            background: var(--gold-light) !important;
+            color: var(--dark) !important;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+        }
+        .hamburger span {
+            width: 28px;
+            height: 2.5px;
+            background: #fff;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            padding: 120px 0 80px;
+            background: var(--dark);
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 20% 50%, rgba(201, 168, 76, 0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(201, 168, 76, 0.04) 0%, transparent 50%),
+                var(--dark);
+            z-index: 0;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content .badge {
+            display: inline-block;
+            background: rgba(201, 168, 76, 0.12);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            padding: 6px 20px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 700;
+            line-height: 1.05;
+            margin-bottom: 18px;
+            color: #fff;
+        }
+        .hero-content h1 span {
+            color: var(--gold);
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            max-width: 480px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-top: 44px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .hero-stats .stat h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+        }
+        .hero-stats .stat p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        /* Hero Image */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        .hero-image-wrapper {
+            position: relative;
+            width: 100%;
+            max-width: 520px;
+            aspect-ratio: 1 / 1.1;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--dark-soft);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(201, 168, 76, 0.08);
+        }
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: rgba(26, 20, 16, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(201, 168, 76, 0.15);
+            border-radius: 14px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+            animation: floatY 4s ease-in-out infinite;
+        }
+        .floating-badge i {
+            font-size: 1.4rem;
+            color: var(--gold);
+        }
+        .floating-badge .info h4 {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .floating-badge .info p {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+
+        .floating-badge:nth-child(2) {
+            top: 10%;
+            right: -10%;
+            animation-delay: 0.6s;
+        }
+        .floating-badge:nth-child(3) {
+            bottom: 12%;
+            left: -12%;
+            animation-delay: 1.2s;
+        }
+
+        @keyframes floatY {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* ===== SERVICES / OFFERINGS ===== */
+        .services {
+            padding: 100px 0 80px;
+            background: var(--dark-soft);
+            position: relative;
+        }
+        .services::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.15), transparent);
+        }
+
+        .services-header {
+            text-align: center;
+            margin-bottom: 56px;
+        }
+        .services-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 28px;
+        }
+
+        .service-card {
+            background: var(--dark-card);
+            border-radius: var(--radius);
+            padding: 32px 24px 28px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(201, 168, 76, 0.12);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+        }
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(201, 168, 76, 0.08);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 1.8rem;
+            color: var(--gold);
+            transition: var(--transition);
+        }
+        .service-card:hover .service-icon {
+            background: rgba(201, 168, 76, 0.18);
+            transform: scale(1.05);
+        }
+
+        .service-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .service-card p {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ===== ABOUT ===== */
+        .about {
+            padding: 100px 0;
+            background: var(--dark);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: var(--dark-soft);
+            aspect-ratio: 4/3;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(201, 168, 76, 0.06);
+        }
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .about-image:hover img {
+            transform: scale(1.02);
+        }
+
+        .about-content .section-title {
+            margin-bottom: 18px;
+        }
+        .about-content .section-desc {
+            margin-bottom: 24px;
+        }
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px 24px;
+            margin-top: 24px;
+        }
+        .about-features li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: var(--text-muted);
+        }
+        .about-features li i {
+            color: var(--gold);
+            font-size: 1rem;
+        }
+
+        /* ===== GALLERY / FOOD ===== */
+        .gallery {
+            padding: 100px 0 80px;
+            background: var(--dark-soft);
+        }
+        .gallery-header {
+            text-align: center;
+            margin-bottom: 52px;
+        }
+        .gallery-header .section-desc {
+            margin: 0 auto;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+        .gallery-item {
+            border-radius: var(--radius);
+            overflow: hidden;
+            aspect-ratio: 1/1;
+            background: var(--dark-card);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+            position: relative;
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        .gallery-item:hover img {
+            transform: scale(1.06);
+        }
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(0deg, rgba(26, 20, 16, 0.7) 0%, transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+        .gallery-item .overlay span {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 4px 16px;
+            border-radius: 30px;
+            backdrop-filter: blur(4px);
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials {
+            padding: 80px 0 100px;
+            background: var(--dark);
+        }
+        .testimonials-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 28px;
+        }
+        .testimonial-card {
+            background: var(--dark-card);
+            border-radius: var(--radius);
+            padding: 32px 28px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+        .testimonial-card:hover {
+            border-color: rgba(201, 168, 76, 0.08);
+            transform: translateY(-4px);
+        }
+        .testimonial-card .stars {
+            color: var(--gold);
+            font-size: 0.9rem;
+            margin-bottom: 12px;
+            letter-spacing: 2px;
+        }
+        .testimonial-card blockquote {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+        .testimonial-card .author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .testimonial-card .author .avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 1rem;
+        }
+        .testimonial-card .author .name {
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+        .testimonial-card .author .role {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* ===== CTA ===== */
+        .cta {
+            padding: 80px 0;
+            background: var(--dark-soft);
+            border-top: 1px solid rgba(201, 168, 76, 0.06);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.06);
+        }
+        .cta-box {
+            background: linear-gradient(135deg, rgba(201, 168, 76, 0.06), rgba(201, 168, 76, 0.01));
+            border: 1px solid rgba(201, 168, 76, 0.08);
+            border-radius: var(--radius);
+            padding: 56px 48px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .cta-box h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            margin-bottom: 12px;
+        }
+        .cta-box h2 span {
+            color: var(--gold);
+        }
+        .cta-box p {
+            color: var(--text-muted);
+            max-width: 480px;
+            margin: 0 auto 28px;
+            font-size: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--dark);
+            padding: 60px 0 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 44px;
+        }
+        .footer-brand .logo {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+        }
+        .footer-brand p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            max-width: 300px;
+            line-height: 1.7;
+        }
+        .footer-brand .socials {
+            display: flex;
+            gap: 14px;
+            margin-top: 18px;
+        }
+        .footer-brand .socials a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+        .footer-brand .socials a:hover {
+            background: var(--gold);
+            color: var(--dark);
+            transform: translateY(-3px);
+        }
+
+        .footer-col h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: #fff;
+        }
+        .footer-col ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .footer-col ul a {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            transition: var(--transition);
+        }
+        .footer-col ul a:hover {
+            color: var(--gold);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+        }
+        .footer-bottom span {
+            color: var(--gold);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-content p {
+                margin: 0 auto 28px;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-image-wrapper {
+                max-width: 420px;
+                margin: 0 auto;
+            }
+            .floating-badge:nth-child(2) {
+                right: 0;
+                top: 5%;
+            }
+            .floating-badge:nth-child(3) {
+                left: 0;
+                bottom: 8%;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .about-content .section-desc {
+                margin: 0 auto 24px;
+            }
+            .about-features {
+                justify-items: center;
+            }
+            .about-image {
+                max-width: 520px;
+                margin: 0 auto;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--dark-soft);
+                flex-direction: column;
+                justify-content: center;
+                padding: 40px 32px;
+                gap: 24px;
+                transition: var(--transition);
+                border-left: 1px solid rgba(201, 168, 76, 0.06);
+            }
+            .nav-links.open {
+                right: 0;
+            }
+            .hamburger {
+                display: flex;
+                z-index: 1000;
+            }
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .hero {
+                padding: 100px 0 60px;
+            }
+            .hero-stats {
+                gap: 24px;
+                flex-wrap: wrap;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 28px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .cta-box {
+                padding: 36px 20px;
+            }
+
+            .floating-badge {
+                display: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            .hero-buttons .btn-primary,
+            .hero-buttons .btn-outline {
+                width: 100%;
+                text-align: center;
+            }
+            .services-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <!-- Replace 'logo.png' with your actual logo file -->
+                <img src="logo.png" alt="Fortunate Hub Ilorin" class="logo-img" />
+                <span>Fortunate</span>Hub
+            </a>
+
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#services">Offers</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#cta" class="nav-cta">Visit Us</a></li>
+            </ul>
+
+            <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="badge">✨ Ilorin's Premium Hangout</div>
+                    <h1>
+                        Your All-in-One<br />
+                        <span>Lifestyle &amp; Hangout</span> Spot
+                    </h1>
+                    <p>
+                        Experience the best of gym, restaurant, pastries, lounge &amp; our
+                        cavelux — all under one roof. Welcome to Fortunate Hub.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#services" class="btn-primary">Explore Now</a>
+                        <a href="https://maps.app.goo.gl/WCVf2MJiDW8F23hX7" class="btn-outline" target="_blank">Get Directions</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <h3>5</h3>
+                            <p>Premium Spaces</p>
+                        </div>
+                        <div class="stat">
+                            <h3>24/7</h3>
+                            <p>Open Service</p>
+                        </div>
+                        <div class="stat">
+                            <h3>★ 4.8</h3>
+                            <p>Guest Rating</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="hero-image-wrapper">
+                        <!-- Replace 'hero-bg.jpg' with your own hero image -->
+                        <img src="hero.jpg" alt="Fortunate Hub Ilorin" />
+                    </div>
+                    <!-- Floating badges -->
+                    <div class="floating-badge" style="top:8%; right:-8%;">
+                        <i class="fas fa-utensils"></i>
+                        <div class="info">
+                            <h4>Gourmet Dining</h4>
+                            <p>Restaurant &amp; Pastries</p>
+                        </div>
+                    </div>
+                    <div class="floating-badge" style="bottom:10%; left:-10%;">
+                        <i class="fas fa-dumbbell"></i>
+                        <div class="info">
+                            <h4>Fitness Hub</h4>
+                            <p>State-of-the-art Gym</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="services-header">
+                <span class="section-tag">What We Offer</span>
+                <h2 class="section-title">Everything You Need, <span>One Place</span></h2>
+                <p class="section-desc">
+                    From fitness to fine dining, we've curated the ultimate lifestyle
+                    experience for you.
+                </p>
+            </div>
+
+            <div class="services-grid">
+                <!-- Gym -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Fitness Gym</h3>
+                    <p>Modern equipment, personal trainers &amp; 24/7 access.</p>
+                </div>
+                <!-- Restaurant -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-utensils"></i></div>
+                    <h3>Restaurant</h3>
+                    <p>Exquisite local &amp; continental dishes prepared by top chefs.</p>
+                </div>
+                <!-- Pastries -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-bread-slice"></i></div>
+                    <h3>Pastries</h3>
+                    <p>Freshly baked cakes, croissants, and sweet treats daily.</p>
+                </div>
+                <!-- Cavelux -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-wine-glass-alt"></i></div>
+                    <h3>Cavelux</h3>
+                    <p>Premium lounge experience with curated drinks &amp; ambiance.</p>
+                </div>
+                <!-- Lounge -->
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-couch"></i></div>
+                    <h3>Lounge</h3>
+                    <p>Relax, unwind, and connect in our stylish lounge area.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <!-- Replace 'about.jpg' with your own image -->
+                    <img src="about.jpg" alt="About Fortunate Hub" />
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">About Us</span>
+                    <h2 class="section-title">Where <span>Lifestyle</span> Meets <span>Comfort</span></h2>
+                    <p class="section-desc">
+                        Fortunate Hub Ilorin is more than a building — it's a destination.
+                        Designed for those who appreciate quality, we bring together fitness,
+                        food, and relaxation in a warm, inviting space.
+                    </p>
+                    <ul class="about-features">
+                        <li><i class="fas fa-check-circle"></i> All-in-one convenience</li>
+                        <li><i class="fas fa-check-circle"></i> Premium amenities</li>
+                        <li><i class="fas fa-check-circle"></i> Expert staff &amp; service</li>
+                        <li><i class="fas fa-check-circle"></i> Safe &amp; welcoming environment</li>
+                    </ul>
+                    <a href="#cta" class="btn-primary" style="margin-top:28px;">Come Visit Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="gallery-header">
+                <span class="section-tag">Our Gallery</span>
+                <h2 class="section-title">A Glimpse Into <span>Fortunate Hub</span></h2>
+                <p class="section-desc">
+                    From mouth-watering dishes to our cozy spaces — see what awaits you.
+                </p>
+            </div>
+
+            <div class="gallery-grid">
+                <!-- Replace these with your own food / interior images -->
+                <div class="gallery-item">
+                    <img src="food1.jpg" alt="Delicious meal" />
+                    <div class="overlay"><span>🍽️ Restaurant</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="food2.jpg" alt="Pastries" />
+                    <div class="overlay"><span>🥐 Pastries</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="cave.jpg" alt="Lounge" />
+                    <div class="overlay"><span>🛋️ Lounge</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="gym.jpg" alt="Gym" />
+                    <div class="overlay"><span>💪 Gym</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="food3.jpg" alt="Cavelux" />
+                    <div class="overlay"><span>🍷 Cavelux</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="inter.jpg" alt="Interior" />
+                    <div class="overlay"><span>✨ Hub Exterior</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="testimonials-header">
+                <span class="section-tag">Testimonials</span>
+                <h2 class="section-title">What Our Guests <span>Say</span></h2>
+            </div>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>
+                        “Fortunate Hub is my go-to spot in Ilorin. The gym is top-notch,
+                        and the restaurant serves the best pasta in town!”
+                    </blockquote>
+                    <div class="author">
+                        <div class="avatar">AM</div>
+                        <div>
+                            <div class="name">Amina M.</div>
+                            <div class="role">Regular Member</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <blockquote>
+                        “I hosted my birthday dinner at the lounge and it was magical.
+                        The ambiance, the food, the service — absolutely flawless.”
+                    </blockquote>
+                    <div class="author">
+                        <div class="avatar">TO</div>
+                        <div>
+                            <div class="name">Tunde O.</div>
+                            <div class="role">Event Host</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">★★★★☆</div>
+                    <blockquote>
+                        “The pastries are heavenly! I come here every morning for
+                        their croissants and coffee. Highly recommend.”
+                    </blockquote>
+                    <div class="author">
+                        <div class="avatar">FB</div>
+                        <div>
+                            <div class="name">Folake B.</div>
+                            <div class="role">Pastry Lover</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CTA ===== -->
+    <section class="cta" id="cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Ready to Experience <span>Fortunate Hub</span>?</h2>
+                <p>
+                    Visit us today and discover why we're Ilorin's favorite all-in-one
+                    lifestyle destination.
+                </p>
+                <a href="https://maps.app.goo.gl/WCVf2MJiDW8F23hX7" class="btn-primary" style="font-size:1rem; padding:16px 48px;">
+                    <i class="fas fa-map-pin" style="margin-right:10px;"></i> Get Directions
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="#" class="logo">
+                        <img src="logo.png" alt="Fortunate Hub" class="logo-img" style="height:38px;" />
+                        <span>Fortunate</span>Hub
+                    </a>
+                    <p>
+                        Your all-in-one lifestyle &amp; hangout spot in Ilorin.
+                        Gym · Restaurant · Pastries · Cavelux · Lounge
+                    </p>
+                    <div class="socials">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#services">Our Offers</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Spaces</h4>
+                    <ul>
+                        <li><a href="#">Gym</a></li>
+                        <li><a href="#">Restaurant</a></li>
+                        <li><a href="#">Pastries</a></li>
+                        <li><a href="#">Cavelux</a></li>
+                        <li><a href="#">Lounge</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="tel:+2348000000000"><i class="fas fa-phone" style="margin-right:8px;color:var(--gold);"></i> 07070646407</a></li>
+                        <li><a href="mailto:info@fortunatehub.com"><i class="fas fa-envelope" style="margin-right:8px;color:var(--gold);"></i> info@fortunatehub.com</a></li>
+                        <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right:8px;color:var(--gold);"></i> Ilorin, Kwara State</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 <span>Fortunate Hub Ilorin</span>. All rights reserved.</p>
+                
+            </div>
+        </div>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 60) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile hamburger toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+            });
+        });
+
+        // Smooth scroll for anchor links (polyfill for older browsers)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
